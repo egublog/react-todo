@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Todo } from '../types/todo';
+import { Todo, todoSchema } from '../types/todo';
 
 export const useTodoList = () => {
   const [todoList, setTodoList] = useState<Todo[]>(() => {
@@ -45,6 +45,27 @@ export const useTodoList = () => {
         title,
         completed: false,
       };
+      // validation
+      const validatedNewTodo = todoSchema.safeParse(newTodo);
+
+      // エラーがある場合、アラートを表示
+      if (!validatedNewTodo.success) {
+        validatedNewTodo.error.errors.forEach((error) => {
+          switch (error.path[0]) {
+            case 'id':
+              alert('idは数値で入力してください');
+              break;
+            case 'title':
+              alert('titleは文字列で入力してください');
+              break;
+            case 'completed':
+              alert('completedは真偽値で入力してください');
+              break;
+          }
+        });
+
+        return prevTodoList;
+      }
 
       // 変更前のTodoリストと合わせる
       return [newTodo, ...prevTodoList];
