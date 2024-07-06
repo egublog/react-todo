@@ -15,10 +15,7 @@ export const AddTodoForm = ({ addTodo }: Props) => {
   };
 
   return (
-    <form
-      className="flex"
-      onSubmit={onSubmit}
-    >
+    <form className="flex" onSubmit={onSubmit}>
       <input
         type="text"
         placeholder="新しいTodoを入力してください"
