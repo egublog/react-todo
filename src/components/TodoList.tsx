@@ -24,7 +24,6 @@ export const TodoList = ({ todoList, changeCompleted, deleteTodo }: Props) => {
                 onChange={() => changeCompleted(todo.id)}
               />
             </div>
-            {/* completedがtrueならクラスを適用、falseならクラスを適用しない */}
             <span
               className={todo.completed ? 'text-gray-400 line-through' : ''}
             >
@@ -40,7 +39,6 @@ export const TodoList = ({ todoList, changeCompleted, deleteTodo }: Props) => {
           </button>
         </div>
       ))}
-      {/* Todoが無い場合、表示する */}
       {todoList.length === 0 && (
         <p className="text-center text-sm">Todoがありません</p>
       )}
